@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CareerAI — AI-Powered Career & Study Assistant{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-sparkles"></i> AI-Powered Career Platform
+      </div>
+      <h1>
+        Launch Your Dream Career with
+        <span class="text-gradient">Artificial Intelligence</span>
+      </h1>
+      <p>
+        Analyze your resume, generate personalized roadmaps, practice interviews with AI, and sharpen your coding skills
+        — all in one powerful platform.
+      </p>
+      <div class="hero-actions">
+        <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg" id="hero-cta-start">
+          Get Started Free <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#features" class="btn btn-outline btn-lg" id="hero-cta-learn">
+          Learn More <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">Career Paths Mapped</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Skill Categories</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">User Satisfaction</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><i class="fas fa-bolt"></i> Features</div>
+      <h2>Everything You Need to <span class="text-gradient">Succeed</span></h2>
+      <p>Powerful AI-driven tools designed to accelerate your career growth from student to professional.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card glass reveal">
+        <div class="feature-icon blue"><i class="fas fa-file-alt"></i></div>
+        <h3>AI Resume Analyzer</h3>
+        <p>Upload your resume and get instant feedback on skills, gaps, ATS optimization, and role-matching powered by
+          AI analysis.</p>
+      </div>
+      <div class="feature-card glass reveal">
+        <div class="feature-icon purple"><i class="fas fa-route"></i></div>
+        <h3>Roadmap Generator</h3>
+        <p>Get a personalized 4-week learning roadmap with weekly tasks, mini-projects, and curated free resources
+          tailored to your goal.</p>
+      </div>
+      <div class="feature-card glass reveal">
+        <div class="feature-icon pink"><i class="fas fa-comments"></i></div>
+        <h3>Mock Interview</h3>
+        <p>Practice with our AI interviewer that asks role-specific questions, evaluates your answers, and provides
+          improvement tips.</p>
+      </div>
+      <div class="feature-card glass reveal">
+        <div class="feature-icon cyan"><i class="fas fa-code"></i></div>
+        <h3>Code Editor</h3>
+        <p>Write and run Python, JavaScript, and Java code instantly with our built-in Monaco editor and live execution
+          engine.</p>
+      </div>
+      <div class="feature-card glass reveal">
+        <div class="feature-icon green"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Free Courses</h3>
+        <p>Curated collection of the best free courses from freeCodeCamp, Coursera, edX, and Udemy — handpicked for each
+          skill.</p>
+      </div>
+      <div class="feature-card glass reveal">
+        <div class="feature-icon blue"><i class="fas fa-project-diagram"></i></div>
+        <h3>Project Ideas</h3>
+        <p>Get real-world project suggestions tailored to your skill set, complete with tech stacks, features, and
+          resume descriptions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section" id="how-it-works" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><i class="fas fa-cogs"></i> How It Works</div>
+      <h2>Three Simple <span class="text-gradient">Steps</span></h2>
+      <p>Get from where you are to where you want to be in just minutes.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card glass reveal">
+        <div class="step-number">1</div>
+        <h3>Share Your Skills</h3>
+        <p>Enter your current skills, paste your resume, or tell us your career goal to get started.</p>
+      </div>
+      <div class="step-card glass reveal">
+        <div class="step-number">2</div>
+        <h3>AI Analyzes & Plans</h3>
+        <p>Our AI engine processes your input to identify gaps, create roadmaps, and generate personalized
+          recommendations.</p>
+      </div>
+      <div class="step-card glass reveal">
+        <div class="step-number">3</div>
+        <h3>Learn & Practice</h3>
+        <p>Follow your roadmap, practice interviews, build projects, and use the code editor to sharpen your skills.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><i class="fas fa-star"></i> Testimonials</div>
+      <h2>Loved by <span class="text-gradient">Students & Professionals</span></h2>
+      <p>See what our users say about their experience with CareerAI.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card glass reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Edumart helped me identify my skill gaps and land my first internship in just 3 weeks. The roadmap
+          was incredibly detailed and accurate."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">PP</div>
+          <div>
+            <strong>Pramod Pradhan</strong>
+            <span>Computer Science Student</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card glass reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The mock interview feature is a game-changer. I practiced for my Google interview and felt so much
+          more confident. Highly recommend!"</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JS</div>
+          <div>
+            <strong>Jyotiranjan Sahoo</strong>
+            <span>Software Engineer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card glass reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I love the code editor integration. Being able to practice coding problems right on the platform
+          without switching tabs is amazing."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SS</div>
+          <div>
+            <strong>Suraj Sahu</strong>
+            <span>Full Stack Developer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section text-center" style="padding: 80px 0;">
+  <div class="container reveal">
+    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;margin-bottom:16px;">
+      Ready to <span class="text-gradient">Supercharge</span> Your Career?
+    </h2>
+    <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 32px;font-size:1.05rem;">
+      Join thousands of students and professionals using AI to reach their career goals faster.
+    </p>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg" id="cta-bottom">
+      Start Now — It's Free <i class="fas fa-rocket"></i>
+    </a>
+  </div>
+</section>
+
+{% endblock %}

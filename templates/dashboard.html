@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard — CareerAI{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-hero">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-th-large"></i> Dashboard</div>
+      <h2>Your AI <span class="text-gradient">Command Center</span></h2>
+      <p>Access all AI-powered career tools in one place. Pick a tool below to begin.</p>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Resume Analyzer -->
+      <a href="{% url 'resume' %}" class="dash-card glass" id="dash-resume">
+        <div class="dash-icon" style="background:rgba(79,140,255,.15);color:var(--accent-blue);">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h3>Resume Analyzer</h3>
+        <p>Paste your resume and get AI-powered skill extraction, gap analysis, ATS optimization tips, and role suggestions.</p>
+        <span class="card-arrow">Open Tool <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <!-- Roadmap Generator -->
+      <a href="{% url 'roadmap' %}" class="dash-card glass" id="dash-roadmap">
+        <div class="dash-icon" style="background:rgba(168,85,247,.15);color:var(--accent-purple);">
+          <i class="fas fa-route"></i>
+        </div>
+        <h3>Roadmap Generator</h3>
+        <p>Define your career goal and current skills — our AI builds a week-by-week learning plan with projects and free resources.</p>
+        <span class="card-arrow">Open Tool <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <!-- Mock Interview -->
+      <a href="{% url 'interview' %}" class="dash-card glass" id="dash-interview">
+        <div class="dash-icon" style="background:rgba(236,72,153,.15);color:var(--accent-pink);">
+          <i class="fas fa-comments"></i>
+        </div>
+        <h3>Mock Interview</h3>
+        <p>Practice with an AI interviewer that asks role-specific questions, evaluates responses, and gives ideal answers.</p>
+        <span class="card-arrow">Open Tool <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <!-- Code Editor -->
+      <a href="{% url 'editor' %}" class="dash-card glass" id="dash-editor">
+        <div class="dash-icon" style="background:rgba(34,211,238,.15);color:var(--accent-cyan);">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3>Code Editor</h3>
+        <p>Write and execute Python, JavaScript, or Java code in a full-featured Monaco editor with live output.</p>
+        <span class="card-arrow">Open Tool <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <!-- Free Courses -->
+      <a href="{% url 'courses' %}" class="dash-card glass" id="dash-courses">
+        <div class="dash-icon" style="background:rgba(52,211,153,.15);color:var(--accent-green);">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Free Courses</h3>
+        <p>Explore curated free courses from top platforms including freeCodeCamp, Coursera, edX, and Udemy.</p>
+        <span class="card-arrow">Browse Courses <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <!-- AI Chatbot -->
+      <a href="{% url 'resume' %}" class="dash-card glass" id="dash-chatbot">
+        <div class="dash-icon" style="background:rgba(79,140,255,.15);color:var(--accent-blue);">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h3>AI Career Advisor</h3>
+        <p>Chat with our AI assistant to get personalized career suggestions, skill gap analysis, and project ideas.</p>
+        <span class="card-arrow">Start Chat <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

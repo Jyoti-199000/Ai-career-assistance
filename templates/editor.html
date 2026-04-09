@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Code Editor — CareerAI{% endblock %}
+
+{% block head_extra %}
+<!-- Monaco Editor Loader -->
+<script src="https://unpkg.com/monaco-editor@0.45.0/min/vs/loader.js"></script>
+<style>
+  #monacoEditor { height: 450px; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <div class="section-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;background:var(--bg-glass);border:1px solid var(--glass-border);font-size:.78rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">
+      <i class="fas fa-code"></i> Code Editor
+    </div>
+    <h1>Built-in <span class="text-gradient">Code Editor</span></h1>
+    <p>Write and run Python, JavaScript, or Java code directly in your browser with live output.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="editor-wrapper glass" style="border-radius:var(--radius-lg);overflow:hidden;">
+      <!-- Left: Editor -->
+      <div class="editor-left">
+        <div class="editor-toolbar">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <select id="langSelect" class="form-control" style="width:auto;padding:8px 14px;font-size:.85rem;">
+              <option value="python">Python</option>
+              <option value="javascript">JavaScript</option>
+              <option value="java">Java</option>
+            </select>
+            <span style="font-size:.82rem;color:var(--text-muted);">CareerAI Editor</span>
+          </div>
+          <button class="btn btn-primary btn-sm" id="runCodeBtn">
+            <i class="fas fa-play"></i> Run Code
+          </button>
+        </div>
+        <div id="monacoEditor"></div>
+      </div>
+
+      <!-- Right: Output -->
+      <div class="editor-output">
+        <div class="editor-output-header">
+          <span><i class="fas fa-terminal"></i> Output</span>
+          <span id="execStatus" style="color:var(--accent-green);">Ready</span>
+        </div>
+        <pre id="codeOutput">Click "Run Code" to execute your program...</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

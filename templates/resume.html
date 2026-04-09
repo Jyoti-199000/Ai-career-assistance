@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Resume Analyzer — CareerAI{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <div class="section-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;background:var(--bg-glass);border:1px solid var(--glass-border);font-size:.78rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">
+      <i class="fas fa-file-alt"></i> Resume Analyzer
+    </div>
+    <h1>AI <span class="text-gradient">Resume Analyzer</span></h1>
+    <p>Paste your resume below and let our AI extract skills, identify gaps, and provide actionable improvement tips.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="tool-layout">
+      <!-- Input Panel -->
+      <div class="tool-panel glass">
+        <form id="resumeForm">
+          <div class="form-group">
+            <label for="resumeText"><i class="fas fa-paste"></i> Paste Your Resume</label>
+            <textarea class="form-control" id="resumeText" placeholder="Paste your full resume text here... Include your skills, experience, education, projects, etc." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="analyzeBtn" style="width:100%;justify-content:center;">
+            <i class="fas fa-magic"></i> Analyze Resume
+          </button>
+        </form>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="tool-panel glass">
+        <div class="loading" id="resumeLoading">
+          <div class="spinner"></div>
+          <p>Analyzing your resume with AI...</p>
+        </div>
+
+        <div id="resumeResults" style="display:none;">
+          <!-- Results injected by JS -->
+        </div>
+
+        <div id="resumePlaceholder">
+          <div style="text-align:center;padding:60px 20px;color:var(--text-muted);">
+            <i class="fas fa-file-alt" style="font-size:3rem;margin-bottom:16px;opacity:.3;display:block;"></i>
+            <p>Your analysis results will appear here after you submit your resume.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

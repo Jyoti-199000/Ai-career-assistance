@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Free Courses — CareerAI{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <div class="section-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;background:var(--bg-glass);border:1px solid var(--glass-border);font-size:.78rem;color:var(--accent-green);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">
+      <i class="fas fa-graduation-cap"></i> Free Courses
+    </div>
+    <h1>Curated <span class="text-gradient">Free Courses</span></h1>
+    <p>Hand-picked, high-quality free courses from top learning platforms to accelerate your career.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+
+    <!-- Filter Bar -->
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:40px;justify-content:center;" class="reveal">
+      <button class="btn btn-sm btn-primary course-filter active" data-filter="all">All</button>
+      <button class="btn btn-sm btn-outline course-filter" data-filter="python">Python</button>
+      <button class="btn btn-sm btn-outline course-filter" data-filter="web">Web Dev</button>
+      <button class="btn btn-sm btn-outline course-filter" data-filter="data">Data Science</button>
+      <button class="btn btn-sm btn-outline course-filter" data-filter="ml">Machine Learning</button>
+      <button class="btn btn-sm btn-outline course-filter" data-filter="devops">DevOps</button>
+    </div>
+
+    <div class="courses-grid" id="coursesGrid">
+
+      <!-- Python -->
+      <div class="course-card glass reveal" data-category="python">
+        <div class="course-platform">freeCodeCamp</div>
+        <h3>Python for Everybody</h3>
+        <p>A comprehensive introduction to programming using Python. Covers data structures, networking, databases, and visualization.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 13 Hours</span>
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="fas fa-certificate"></i> Free Certificate</span>
+        </div>
+        <a href="https://www.freecodecamp.org/learn/scientific-computing-with-python/" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <div class="course-card glass reveal" data-category="python">
+        <div class="course-platform">Coursera</div>
+        <h3>Python 3 Programming Specialization</h3>
+        <p>Learn Python from the University of Michigan. Covers classes, testing, and working with APIs and data from the web.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 20 Hours</span>
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="fas fa-certificate"></i> Free Audit</span>
+        </div>
+        <a href="https://www.coursera.org/specializations/python-3-programming" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <!-- Web Dev -->
+      <div class="course-card glass reveal" data-category="web">
+        <div class="course-platform">freeCodeCamp</div>
+        <h3>Responsive Web Design</h3>
+        <p>Learn HTML, CSS, Flexbox, Grid, and responsive design principles. Build 5 real-world projects for certification.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 300 Hours</span>
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="fas fa-certificate"></i> Free Certificate</span>
+        </div>
+        <a href="https://www.freecodecamp.org/learn/2022/responsive-web-design/" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <div class="course-card glass reveal" data-category="web">
+        <div class="course-platform">Udemy</div>
+        <h3>JavaScript Essentials</h3>
+        <p>Master JavaScript fundamentals including ES6+, DOM manipulation, async/await, and modern JS patterns.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 12 Hours</span>
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="fas fa-certificate"></i> Free Access</span>
+        </div>
+        <a href="https://www.udemy.com/topic/javascript/" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <!-- Data Science -->
+      <div class="course-card glass reveal" data-category="data">
+        <div class="course-platform">edX</div>
+        <h3>Data Science: R Basics</h3>
+        <p>Introduction to data science using R programming from Harvard University. Covers wrangling, visualization, and probability.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 8 Weeks</span>
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="fas fa-certificate"></i> Free Audit</span>
+        </div>
+        <a href="https://www.edx.org/learn/data-science" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <div class="course-card glass reveal" data-category="data">
+        <div class="course-platform">freeCodeCamp</div>
+        <h3>Data Analysis with Python</h3>
+        <p>Learn data analysis using NumPy, Pandas, Matplotlib, and Seaborn. Includes 5 data analysis projects.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 300 Hours</span>
+          <span><i class="fas fa-signal"></i> Intermediate</span>
+          <span><i class="fas fa-certificate"></i> Free Certificate</span>
+        </div>
+        <a href="https://www.freecodecamp.org/learn/data-analysis-with-python/" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <!-- Machine Learning -->
+      <div class="course-card glass reveal" data-category="ml">
+        <div class="course-platform">Coursera</div>
+        <h3>Machine Learning by Andrew Ng</h3>
+        <p>The legendary ML course by Stanford's Andrew Ng. Covers linear regression, neural networks, SVMs, clustering, and more.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 60 Hours</span>
+          <span><i class="fas fa-signal"></i> Intermediate</span>
+          <span><i class="fas fa-certificate"></i> Free Audit</span>
+        </div>
+        <a href="https://www.coursera.org/learn/machine-learning" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <div class="course-card glass reveal" data-category="ml">
+        <div class="course-platform">freeCodeCamp</div>
+        <h3>Machine Learning with Python</h3>
+        <p>Learn ML fundamentals — TensorFlow, neural networks, NLP, and reinforcement learning with hands-on projects.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 300 Hours</span>
+          <span><i class="fas fa-signal"></i> Intermediate</span>
+          <span><i class="fas fa-certificate"></i> Free Certificate</span>
+        </div>
+        <a href="https://www.freecodecamp.org/learn/machine-learning-with-python/" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+      <!-- DevOps -->
+      <div class="course-card glass reveal" data-category="devops">
+        <div class="course-platform">edX</div>
+        <h3>Introduction to DevOps</h3>
+        <p>Learn DevOps practices including CI/CD, containerization, infrastructure as code, and cloud deployment.</p>
+        <div class="course-meta">
+          <span><i class="fas fa-clock"></i> 6 Weeks</span>
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="fas fa-certificate"></i> Free Audit</span>
+        </div>
+        <a href="https://www.edx.org/learn/devops" target="_blank" class="btn btn-primary btn-sm">Start Course 🚀</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.course-filter');
+  const cards   = document.querySelectorAll('.course-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => { b.classList.remove('btn-primary','active'); b.classList.add('btn-outline'); });
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary','active');
+
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = '';
+          card.style.animation = 'fadeInUp .4s var(--ease-out-quint) both';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mock Interview — CareerAI{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <div class="section-badge" style="display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;background:var(--bg-glass);border:1px solid var(--glass-border);font-size:.78rem;color:var(--accent-pink);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">
+      <i class="fas fa-comments"></i> Mock Interview
+    </div>
+    <h1>AI <span class="text-gradient">Mock Interview</span></h1>
+    <p>Practice with our AI interviewer. Get role-specific questions, real-time feedback, and ideal answers.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container" style="max-width:800px;">
+
+    <!-- Setup Form -->
+    <div id="interviewSetup" class="tool-panel glass" style="margin-bottom:32px;">
+      <form id="interviewStartForm">
+        <div class="form-group">
+          <label for="roleInput"><i class="fas fa-user-tie"></i> Target Role</label>
+          <input type="text" class="form-control" id="roleInput" placeholder="e.g., Frontend Developer, Data Scientist, DevOps Engineer" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="startInterviewBtn" style="width:100%;justify-content:center;">
+          <i class="fas fa-play"></i> Start Mock Interview
+        </button>
+      </form>
+    </div>
+
+    <!-- Chat Area -->
+    <div id="interviewChat" style="display:none;">
+      <div class="tool-panel glass">
+        <div class="chat-container" id="chatContainer">
+          <!-- Chat bubbles injected by JS -->
+        </div>
+
+        <div class="chat-input-area" id="chatInputArea">
+          <input type="text" class="form-control" id="chatInput" placeholder="Type your answer here...">
+          <button class="btn btn-primary" id="chatSend">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
