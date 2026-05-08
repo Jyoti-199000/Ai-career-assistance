@@ -1,0 +1,159 @@
+{% extends 'accounts/auth_base.html' %}
+
+{% block auth_title %}Sign Up{% endblock %}
+
+{% block auth_content %}
+<div class="auth-wrapper">
+  <!-- Left Panel — Branding -->
+  <div class="auth-branding">
+    <div class="auth-branding-content">
+      <a href="/" class="auth-logo">
+        <span class="brand-icon"><i class="fas fa-rocket"></i></span>
+        Edumart
+      </a>
+      <h1>Start Your <span class="text-gradient">Career Journey</span></h1>
+      <p>Join thousands of students and professionals using AI to reach their career goals faster.</p>
+
+      <div class="auth-features">
+        <div class="auth-feature">
+          <div class="auth-feature-icon"><i class="fas fa-file-alt"></i></div>
+          <div>
+            <strong>AI Resume Analyzer</strong>
+            <span>Get instant feedback on your resume</span>
+          </div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon"><i class="fas fa-route"></i></div>
+          <div>
+            <strong>Career Roadmaps</strong>
+            <span>Personalized learning plans</span>
+          </div>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon"><i class="fas fa-comments"></i></div>
+          <div>
+            <strong>Mock Interviews</strong>
+            <span>Practice with AI interviewers</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-stats-row">
+        <div class="auth-stat"><strong>10K+</strong><span>Users</span></div>
+        <div class="auth-stat"><strong>50+</strong><span>Careers</span></div>
+        <div class="auth-stat"><strong>98%</strong><span>Satisfaction</span></div>
+      </div>
+    </div>
+    <div class="auth-branding-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+  </div>
+
+  <!-- Right Panel — Form -->
+  <div class="auth-form-panel">
+    <div class="auth-form-container">
+      <div class="auth-form-header">
+        <h2>Create Account</h2>
+        <p>Fill in your details to get started</p>
+      </div>
+
+      <!-- Error Alert -->
+      <div class="auth-alert auth-alert-error" id="signupError" style="display:none;">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="signupErrorText"></span>
+      </div>
+
+      <form id="signupForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input type="text" id="firstName" class="form-control" placeholder="John" autocomplete="given-name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input type="text" id="lastName" class="form-control" placeholder="Doe" autocomplete="family-name">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signupUsername">Username</label>
+          <div class="input-wrapper">
+            <i class="fas fa-at"></i>
+            <input type="text" id="signupUsername" class="form-control" placeholder="johndoe" required autocomplete="username">
+          </div>
+          <span class="form-hint" id="usernameHint"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="signupEmail">Email Address</label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="signupEmail" class="form-control" placeholder="john@example.com" required autocomplete="email">
+          </div>
+          <span class="form-hint" id="emailHint"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="signupPassword" class="form-control" placeholder="Min. 8 characters" required autocomplete="new-password">
+            <button type="button" class="password-toggle" data-target="signupPassword">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <div class="password-strength" id="passwordStrength">
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <span class="strength-text" id="strengthText"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signupPasswordConfirm">Confirm Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="signupPasswordConfirm" class="form-control" placeholder="Re-enter password" required autocomplete="new-password">
+            <button type="button" class="password-toggle" data-target="signupPasswordConfirm">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="agreeTerms" required>
+          <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="signupBtn">
+          <span class="btn-text">Create Account</span>
+          <span class="btn-loader" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
+        </button>
+      </form>
+
+      <div class="auth-divider">
+        <span>or continue with</span>
+      </div>
+
+      <div class="social-login">
+        <button class="btn btn-social" disabled title="Coming soon">
+          <i class="fab fa-google"></i> Google
+        </button>
+        <button class="btn btn-social" disabled title="Coming soon">
+          <i class="fab fa-github"></i> GitHub
+        </button>
+      </div>
+
+      <p class="auth-footer-text">
+        Already have an account? <a href="{% url 'login' %}">Log In</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,16 +1,83 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Dashboard — CareerAI{% endblock %}
+{% block title %}Dashboard — Edumart{% endblock %}
 
 {% block content %}
-
-<section class="dashboard-hero">
+<section class="dashboard-page">
   <div class="container">
-    <div class="section-header">
-      <div class="section-badge"><i class="fas fa-th-large"></i> Dashboard</div>
-      <h2>Your AI <span class="text-gradient">Command Center</span></h2>
-      <p>Access all AI-powered career tools in one place. Pick a tool below to begin.</p>
+    <!-- Dashboard Header -->
+    <div class="dash-header">
+      <div class="dash-welcome">
+        <h1>
+          {% if user.is_authenticated %}
+            Welcome back, <span class="text-gradient">{{ user.first_name|default:user.username }}</span> 👋
+          {% else %}
+            Your AI <span class="text-gradient">Command Center</span>
+          {% endif %}
+        </h1>
+        <p>Access all AI-powered career tools and track your progress</p>
+      </div>
+      {% if user.is_authenticated %}
+      <div class="dash-header-stats">
+        <div class="dash-streak glass">
+          <i class="fas fa-fire" style="color:#f59e0b;"></i>
+          <span id="dashStreak">0</span> day streak
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+    <!-- Stats Cards Row -->
+    <div class="stats-row">
+      <div class="stat-card glass">
+        <div class="stat-card-icon blue"><i class="fas fa-file-alt"></i></div>
+        <div class="stat-card-content">
+          <div class="stat-card-value" id="dashResumes">0</div>
+          <div class="stat-card-label">Resumes Analyzed</div>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-card-icon purple"><i class="fas fa-route"></i></div>
+        <div class="stat-card-content">
+          <div class="stat-card-value" id="dashRoadmaps">0</div>
+          <div class="stat-card-label">Roadmaps Created</div>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-card-icon pink"><i class="fas fa-comments"></i></div>
+        <div class="stat-card-content">
+          <div class="stat-card-value" id="dashInterviews">0</div>
+          <div class="stat-card-label">Interviews Done</div>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-card-icon green"><i class="fas fa-star"></i></div>
+        <div class="stat-card-content">
+          <div class="stat-card-value" id="dashScore">0</div>
+          <div class="stat-card-label">Career Score</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Completion Banner -->
+    <div class="completion-banner glass" id="completionBanner">
+      <div class="completion-banner-left">
+        <h3><i class="fas fa-user-check"></i> Complete Your Profile</h3>
+        <p>A complete profile helps us give you better career recommendations</p>
+        <div class="completion-bar" style="max-width:300px;">
+          <div class="completion-fill" id="dashCompletionFill" style="width:0%"></div>
+        </div>
+      </div>
+      <a href="{% url 'profile' %}" class="btn btn-primary btn-sm">Complete Profile <i class="fas fa-arrow-right"></i></a>
+    </div>
+    {% endif %}
+
+    <!-- Tools Grid -->
+    <div class="section-header" style="margin-bottom:30px; text-align:left;">
+      <div class="section-badge"><i class="fas fa-bolt"></i> AI Tools</div>
+      <h2>Career <span class="text-gradient">Tools</span></h2>
     </div>
 
     <div class="dashboard-grid">
@@ -74,7 +141,28 @@
         <span class="card-arrow">Start Chat <i class="fas fa-arrow-right"></i></span>
       </a>
     </div>
+
+    {% if user.is_authenticated %}
+    <!-- Recent Activity -->
+    <div class="dash-activity-section">
+      <div class="section-header" style="text-align:left; margin-bottom:20px;">
+        <h2><i class="fas fa-clock" style="color:var(--accent-cyan);"></i> Recent Activity</h2>
+      </div>
+      <div class="activity-feed glass" id="dashActivityFeed">
+        <div class="empty-state">
+          <i class="fas fa-history"></i>
+          <p>No activity yet. Start using the tools above to track your progress!</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
   </div>
 </section>
+{% endblock %}
 
+{% block scripts %}
+{% if user.is_authenticated %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endif %}
 {% endblock %}

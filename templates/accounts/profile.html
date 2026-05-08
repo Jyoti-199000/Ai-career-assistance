@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile — Edumart{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+  <div class="container">
+    <!-- Profile Header -->
+    <div class="profile-header glass" id="profileHeader">
+      <div class="profile-cover"></div>
+      <div class="profile-header-content">
+        <div class="profile-avatar-wrapper">
+          <div class="profile-avatar" id="profileAvatar">
+            <span id="avatarInitial">{{ user.first_name|default:user.username|make_list|first|upper }}</span>
+            <img id="avatarImage" src="" alt="Avatar" style="display:none;">
+          </div>
+          <label class="avatar-upload-btn" for="avatarUpload" title="Change photo">
+            <i class="fas fa-camera"></i>
+          </label>
+          <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
+        </div>
+        <div class="profile-info">
+          <h1 id="profileName">{{ user.first_name }} {{ user.last_name }}</h1>
+          <p class="profile-headline" id="profileHeadline">Complete your profile to add a headline</p>
+          <div class="profile-meta">
+            <span><i class="fas fa-envelope"></i> {{ user.email }}</span>
+            <span id="profileLocation" style="display:none;"><i class="fas fa-map-marker-alt"></i> <span></span></span>
+            <span><i class="fas fa-calendar-alt"></i> Joined {{ user.date_joined|date:"M Y" }}</span>
+          </div>
+        </div>
+        <div class="profile-actions-top">
+          <button class="btn btn-primary btn-sm" id="editProfileBtn">
+            <i class="fas fa-edit"></i> Edit Profile
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Completion -->
+    <div class="profile-completion glass" id="profileCompletion">
+      <div class="completion-info">
+        <h3><i class="fas fa-tasks"></i> Profile Completion</h3>
+        <span class="completion-percent" id="completionPercent">0%</span>
+      </div>
+      <div class="completion-bar">
+        <div class="completion-fill" id="completionFill" style="width:0%"></div>
+      </div>
+      <p class="completion-hint" id="completionHint">Add more details to complete your profile</p>
+    </div>
+
+    <div class="profile-grid">
+      <!-- Left Column -->
+      <div class="profile-left">
+        <!-- About -->
+        <div class="profile-card glass">
+          <h3><i class="fas fa-user"></i> About</h3>
+          <p id="profileBio" class="profile-bio">No bio added yet.</p>
+        </div>
+
+        <!-- Skills -->
+        <div class="profile-card glass">
+          <div class="card-header-row">
+            <h3><i class="fas fa-code"></i> Skills</h3>
+            <button class="btn btn-outline btn-sm" id="addSkillBtn"><i class="fas fa-plus"></i> Add</button>
+          </div>
+          <div id="skillsList" class="skills-list">
+            <p class="empty-state-text">No skills added yet</p>
+          </div>
+          <!-- Add Skill Modal -->
+          <div class="inline-form" id="addSkillForm" style="display:none;">
+            <input type="text" id="skillNameInput" class="form-control" placeholder="Skill name (e.g., Python)">
+            <select id="skillProficiency" class="form-control">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+              <option value="expert">Expert</option>
+            </select>
+            <div class="inline-form-actions">
+              <button class="btn btn-primary btn-sm" id="saveSkillBtn">Save</button>
+              <button class="btn btn-outline btn-sm" id="cancelSkillBtn">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="profile-card glass">
+          <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+          <p id="profileEducation" class="profile-bio">No education details added yet.</p>
+        </div>
+
+        <!-- Social Links -->
+        <div class="profile-card glass">
+          <h3><i class="fas fa-link"></i> Social Links</h3>
+          <div id="socialLinks" class="social-links-list">
+            <p class="empty-state-text">No social links added yet</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="profile-right">
+        <!-- Career Stats -->
+        <div class="profile-card glass">
+          <h3><i class="fas fa-chart-bar"></i> Career Stats</h3>
+          <div class="profile-stats-grid" id="profileStats">
+            <div class="profile-stat-item">
+              <div class="stat-value" id="statResumes">0</div>
+              <div class="stat-label">Resumes</div>
+            </div>
+            <div class="profile-stat-item">
+              <div class="stat-value" id="statRoadmaps">0</div>
+              <div class="stat-label">Roadmaps</div>
+            </div>
+            <div class="profile-stat-item">
+              <div class="stat-value" id="statInterviews">0</div>
+              <div class="stat-label">Interviews</div>
+            </div>
+            <div class="profile-stat-item">
+              <div class="stat-value" id="statCourses">0</div>
+              <div class="stat-label">Courses</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="profile-card glass">
+          <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+          <div id="activityTimeline" class="activity-timeline">
+            <p class="empty-state-text">No activity yet. Start using tools to see your progress!</p>
+          </div>
+        </div>
+
+        <!-- Career Interests -->
+        <div class="profile-card glass">
+          <h3><i class="fas fa-bullseye"></i> Career Interests</h3>
+          <p id="profileCareerInterests" class="profile-bio">No career interests specified yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Edit Profile Modal -->
+<div class="modal-overlay" id="editProfileModal" style="display:none;">
+  <div class="modal glass">
+    <div class="modal-header">
+      <h3>Edit Profile</h3>
+      <button class="btn-icon modal-close" id="closeEditModal"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="editProfileForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="editFirstName">First Name</label>
+            <input type="text" id="editFirstName" class="form-control" value="{{ user.first_name }}">
+          </div>
+          <div class="form-group">
+            <label for="editLastName">Last Name</label>
+            <input type="text" id="editLastName" class="form-control" value="{{ user.last_name }}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" class="form-control" value="{{ user.email }}">
+        </div>
+        <div class="form-group">
+          <label for="editHeadline">Headline</label>
+          <input type="text" id="editHeadline" class="form-control" placeholder="e.g., Full Stack Developer">
+        </div>
+        <div class="form-group">
+          <label for="editBio">Bio</label>
+          <textarea id="editBio" class="form-control" rows="3" placeholder="Tell us about yourself..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editLocation">Location</label>
+          <input type="text" id="editLocation" class="form-control" placeholder="e.g., Mumbai, India">
+        </div>
+        <div class="form-group">
+          <label for="editPhone">Phone</label>
+          <input type="tel" id="editPhone" class="form-control" placeholder="+91 ...">
+        </div>
+        <div class="form-group">
+          <label for="editExperience">Experience Level</label>
+          <select id="editExperience" class="form-control">
+            <option value="beginner">Beginner (0-1 years)</option>
+            <option value="intermediate">Intermediate (1-3 years)</option>
+            <option value="advanced">Advanced (3-5 years)</option>
+            <option value="expert">Expert (5+ years)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editEducation">Education</label>
+          <textarea id="editEducation" class="form-control" rows="2" placeholder="Your education background..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editCareerInterests">Career Interests</label>
+          <textarea id="editCareerInterests" class="form-control" rows="2" placeholder="e.g., Web Development, AI/ML..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editLinkedin">LinkedIn URL</label>
+          <input type="url" id="editLinkedin" class="form-control" placeholder="https://linkedin.com/in/...">
+        </div>
+        <div class="form-group">
+          <label for="editGithub">GitHub URL</label>
+          <input type="url" id="editGithub" class="form-control" placeholder="https://github.com/...">
+        </div>
+        <div class="form-group">
+          <label for="editPortfolio">Portfolio URL</label>
+          <input type="url" id="editPortfolio" class="form-control" placeholder="https://yoursite.com">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" id="cancelEditBtn">Cancel</button>
+      <button class="btn btn-primary" id="saveProfileBtn">
+        <i class="fas fa-save"></i> Save Changes
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal-overlay" id="changePasswordModal" style="display:none;">
+  <div class="modal glass">
+    <div class="modal-header">
+      <h3>Change Password</h3>
+      <button class="btn-icon modal-close" id="closePasswordModal"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="changePasswordForm" novalidate>
+        <div class="form-group">
+          <label for="currentPassword">Current Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="currentPassword" class="form-control" required>
+            <button type="button" class="password-toggle" data-target="currentPassword"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="newPassword" class="form-control" required>
+            <button type="button" class="password-toggle" data-target="newPassword"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmNewPassword">Confirm New Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="confirmNewPassword" class="form-control" required>
+            <button type="button" class="password-toggle" data-target="confirmNewPassword"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" id="cancelPasswordBtn">Cancel</button>
+      <button class="btn btn-primary" id="savePasswordBtn">
+        <i class="fas fa-key"></i> Update Password
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}
