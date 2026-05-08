@@ -8,7 +8,7 @@ env/
 .env
 
 # Django
-db.sqlite3
+# db.sqlite3 (Commented out to allow pushing local DB)
 staticfiles/
 
 # Node
