@@ -47,25 +47,25 @@
 
       <ul class="nav-links" id="navLinks">
         <li><a href="{% url 'home' %}"
-            class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+            class="{% if request.resolver_match and request.resolver_match.url_name == 'home' %}active{% endif %}">
             <i class="fas fa-home"></i> Home</a></li>
         <li><a href="{% url 'dashboard' %}"
-            class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+            class="{% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
             <i class="fas fa-th-large"></i> Dashboard</a></li>
         <li><a href="{% url 'resume' %}"
-            class="{% if request.resolver_match.url_name == 'resume' %}active{% endif %}">
+            class="{% if request.resolver_match and request.resolver_match.url_name == 'resume' %}active{% endif %}">
             <i class="fas fa-file-alt"></i> Resume</a></li>
         <li><a href="{% url 'roadmap' %}"
-            class="{% if request.resolver_match.url_name == 'roadmap' %}active{% endif %}">
+            class="{% if request.resolver_match and request.resolver_match.url_name == 'roadmap' %}active{% endif %}">
             <i class="fas fa-route"></i> Roadmap</a></li>
         <li><a href="{% url 'interview' %}"
-            class="{% if request.resolver_match.url_name == 'interview' %}active{% endif %}">
+            class="{% if request.resolver_match and request.resolver_match.url_name == 'interview' %}active{% endif %}">
             <i class="fas fa-comments"></i> Interview</a></li>
         <li><a href="{% url 'courses' %}"
-            class="{% if request.resolver_match.url_name == 'courses' %}active{% endif %}">
+            class="{% if request.resolver_match and request.resolver_match.url_name == 'courses' %}active{% endif %}">
             <i class="fas fa-graduation-cap"></i> Courses</a></li>
         <li><a href="{% url 'editor' %}"
-            class="{% if request.resolver_match.url_name == 'editor' %}active{% endif %}">
+            class="{% if request.resolver_match and request.resolver_match.url_name == 'editor' %}active{% endif %}">
             <i class="fas fa-code"></i> Editor</a></li>
       </ul>
 
@@ -86,16 +86,16 @@
         <div class="user-menu" id="userMenu">
           <button class="user-menu-trigger" id="userMenuTrigger">
             <div class="user-avatar-sm" id="navAvatar">
-              {{ user.first_name|default:user.username|make_list|first|upper }}
+              {{ user.get_full_name|default:user.username|slice:":1"|upper }}
             </div>
-            <span class="user-name-sm">{{ user.first_name|default:user.username }}</span>
+            <span class="user-name-sm">{{ user.get_full_name|default:user.username }}</span>
             <i class="fas fa-chevron-down"></i>
           </button>
           <div class="user-dropdown" id="userDropdown">
             <div class="dropdown-header">
-              <div class="user-avatar-sm">{{ user.first_name|default:user.username|make_list|first|upper }}</div>
+              <div class="user-avatar-sm">{{ user.get_full_name|default:user.username|slice:":1"|upper }}</div>
               <div>
-                <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+                <strong>{{ user.get_full_name|default:user.username }}</strong>
                 <span>{{ user.email }}</span>
               </div>
             </div>
@@ -189,25 +189,25 @@
 
   <!-- ===== MOBILE BOTTOM NAV ===== -->
   <nav class="mobile-bottom-nav" id="mobileNav">
-    <a href="{% url 'home' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+    <a href="{% url 'home' %}" class="mobile-nav-item {% if request.resolver_match and request.resolver_match.url_name == 'home' %}active{% endif %}">
       <i class="fas fa-home"></i>
       <span>Home</span>
     </a>
-    <a href="{% url 'dashboard' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+    <a href="{% url 'dashboard' %}" class="mobile-nav-item {% if request.resolver_match and request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
       <i class="fas fa-th-large"></i>
       <span>Dashboard</span>
     </a>
-    <a href="{% url 'resume' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'resume' %}active{% endif %}">
+    <a href="{% url 'resume' %}" class="mobile-nav-item {% if request.resolver_match and request.resolver_match.url_name == 'resume' %}active{% endif %}">
       <i class="fas fa-file-alt"></i>
       <span>Resume</span>
     </a>
     {% if user.is_authenticated %}
-    <a href="{% url 'profile' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+    <a href="{% url 'profile' %}" class="mobile-nav-item {% if request.resolver_match and request.resolver_match.url_name == 'profile' %}active{% endif %}">
       <i class="fas fa-user"></i>
       <span>Profile</span>
     </a>
     {% else %}
-    <a href="{% url 'login' %}" class="mobile-nav-item">
+    <a href="{% url 'login' %}" class="mobile-nav-item {% if request.resolver_match and request.resolver_match.url_name == 'login' %}active{% endif %}">
       <i class="fas fa-sign-in-alt"></i>
       <span>Login</span>
     </a>
@@ -219,18 +219,20 @@
     // Pass auth state to JS
     window.EDUMART = {
       isAuthenticated: {{ user.is_authenticated|yesno:"true,false" }},
-      csrfToken: '{{ csrf_token }}',
-      {% if user.is_authenticated %}
-      user: {
-        id: {{ user.id }},
-        username: '{{ user.username }}',
-        firstName: '{{ user.first_name|escapejs }}',
-        email: '{{ user.email|escapejs }}',
-      },
-      {% endif %}
+      csrfToken: '{{ csrf_token|default:"" }}',
+      user: null
     };
+    {% if user.is_authenticated %}
+    window.EDUMART.user = {
+      id: {{ user.id|default:"null" }},
+      username: '{{ user.username|escapejs }}',
+      firstName: '{{ user.first_name|default:user.username|escapejs }}',
+      email: '{{ user.email|escapejs }}'
+    };
+    {% endif %}
   </script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/tools.js' %}"></script>
   {% block scripts %}{% endblock %}
 
 </body>

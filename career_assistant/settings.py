@@ -23,9 +23,9 @@ SECRET_KEY = os.environ.get(
     'django-insecure-k_p@#d0_vtlne*b_g+g8w389k0h1t5(@5sn@)#vse)jyf%5m+7',
 )
 
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -185,7 +185,7 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'Edumart <noreply@edum
 
 # ─── Security (production) ───────────────────────────────────
 
-if not DEBUG:
+if not DEBUG and os.environ.get('SECURE_SSL', 'False') == 'True':
     SECURE_SSL_REDIRECT = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -194,3 +194,7 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
+else:
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
